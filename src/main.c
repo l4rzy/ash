@@ -1,35 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-#include <archive.h>
-#include <archive_entry.h>
+#include "common.h"
+#include "command/command.h"
 
 #define MAX_COMMAND_LENGTH 1024
 #define ASH_VER_MAJ 0
 #define ASH_VER_MIN 1
 
-typedef struct _ash_session_t {
-    char *archive_name;
-    struct archive *handler;
-} ash_session_t;
-
-static ash_session_t *session;
-
-int command_ls() {
-    struct archive_entry *entry;
-
-    // Loop through each entry in the archive
-    while (archive_read_next_header(session->handler, &entry) == ARCHIVE_OK) {
-        printf("name\tperm\tsize\n====\n");
-        printf("%s\t%d\t%ld\n", archive_entry_pathname(entry), archive_entry_perm(entry), archive_entry_size(entry));
-        archive_read_data_skip(session->handler); // Skip actual file data, if not needed
-    }
-
-    return 0;
-}
+ash_session_t *session;
 
 int command_help() {
     printf("tbd\n");
@@ -39,7 +15,7 @@ int command_help() {
 int process_command(const char *command) {
     // Process the command here
     if (!strncmp(command, "ls", 2)) {
-        return command_ls();
+        return command_ls(0, NULL);
     }
     if (!strncmp(command, "help", 4)) {
         return command_help();
@@ -106,5 +82,7 @@ int main(int argc, char *argv[]) {
         free(input);
     }
 
+    archive_free(session->handler);
+    free(session);
     return 0;
 }
