@@ -1,16 +1,17 @@
 # Ash
 ```
-           _     
-  __ _ ___| |__  
- / _` / __| '_ \ 
-| (_| \__ \ | | |
- \__,_|___/_| |_|
+           _      ____   
+  __ _ ___| |__   \ \ \  
+ / _` / __| '_ \   \ \ \ 
+| (_| \__ \ | | |  / / / 
+ \__,_|___/_| |_| /_/_/  
+                         
                  
 ```
-An interactive **archive shell**. Built upon (libarchive)[https://github.com/libarchive/libarchive].
+An interactive **archive shell**. Built upon [libarchive](https://github.com/libarchive/libarchive).
 
 ## Why?
-You don't always have GUI to run File roller or Ark. Furthermore, I want to access my archives and interact with them like in a unix shell.
+You don't always have a GUI environment to run File Roller or Ark. Furthermore, I want to access my archives and interact with them like in a UNIX shell.
 
 ## Building
 
@@ -22,6 +23,10 @@ $ meson setup b
 $ cd b
 $ ninja
 ```
+
+## Screenshots
+![screenshot1](/assets/s1.png)
+
 
 ## License
 MIT
